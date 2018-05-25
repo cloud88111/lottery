@@ -19,20 +19,19 @@ Man = {'Name1': 'name1@email.com',
 strfrom = 'email'
 server = smtplib.SMTP()
 
-conn = lt.Lottery(strfrom,server,lott,Man)
-strto = lt.Lottery.emaillist(conn)
-
 draw = lott*3
+
+conn = lt.Lottery(strfrom,server,lott,Man,draw)
+strto = lt.Lottery.emaillist(conn)
 
 #each player pays 250 to particpate
 prize = len(lott)*250
 
-#check = lt.Lottery.checkwinner(conn,lott,draw)
-table = lt.Lottery.gettable(conn,draw)
+table = lt.Lottery.gettable(conn)
 
 message = "Prize is %s Big Ones" %prize
-#lt.Lottery.sendtable(conn,table,message)
+#lt.Lottery.sendtable(conn,message)
 
 time.sleep(15)
 
-lt.Lottery.run(conn,draw)
+lt.Lottery.run(conn)
