@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 import pandas as pd
 
 #enter list of competitors here
-lott = ['Rob']
+lott = []
 
 #dictionary of participant names and email addresses
 Man = {}
