@@ -5,6 +5,12 @@ Created on Fri May 25 15:23:58 2018
 @author: Rob
 """
 
+import pandas as pd
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import math
+import time
+      
 class Lottery:
     
     def __init__ (self, strfrom, server, participants, emails, full_list, username, password):
@@ -45,13 +51,10 @@ class Lottery:
     
     #gets table for display
     def gettable(self):
-        import pandas as pd
         return pd.DataFrame(list(self.counter(self.full_list).items()),columns=['Name','Lives'])
     
     #sends table in an email to the list of participants
     def sendtable(self,table,message):
-        from email.mime.multipart import MIMEMultipart
-        from email.mime.text import MIMEText
         msgRoot = MIMEMultipart('related')
         msgRoot['Subject'] = message
         msgRoot['From'] = self.strfrom
@@ -75,8 +78,6 @@ class Lottery:
         return d
 
     def run(self):
-        import math
-        import time
         ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(math.floor(n/10)%10!=1)*(n%10<4)*n%10::4])
         count = 1
         while True:
