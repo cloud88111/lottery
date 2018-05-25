@@ -25,18 +25,18 @@ class Lottery:
         my_dict = my_dict
         return my_dict
         
-    def checkwinner(self,list1,list2):
+    def checkwinner(self,list1):
         win = 0
-        dict1 = self.counter(list1,list2)
+        dict1 = self.counter(self.participants,list1)
         for x in dict1:
             if dict1[x] == 0:
                 win += 1
             else: win = win
         return win
     
-    def gettable(self,list1,list2):
+    def gettable(self,list1):
         import pandas as pd
-        return pd.DataFrame(list(self.counter(list1,list2).items()),columns=['Name','Lives'])
+        return pd.DataFrame(list(self.counter(self.participants,list1).items()),columns=['Name','Lives'])
     
     def sendtable(self,table,message):
         from email.mime.multipart import MIMEMultipart
@@ -69,3 +69,18 @@ class Lottery:
         d = random.choice(list1)
         list1.remove(d)
         return d
+    
+    def run(self,list1):
+        count = 1
+        while True:
+            d = self.pullout(list1)
+            check = self.checkwinner(list1)
+            if check == 0:
+                print(d)
+                if count%3==0:
+                    print(self.gettable(list1))
+                count += 1
+            else:
+                message = "Winner is %s! Don't you just hate them" %d.upper()   
+                print(message)
+                break

@@ -28,23 +28,11 @@ draw = lott*3
 prize = len(lott)*250
 
 #check = lt.Lottery.checkwinner(conn,lott,draw)
-table = lt.Lottery.gettable(conn,lott,draw)
+table = lt.Lottery.gettable(conn,draw)
 
 message = "Prize is %s Big Ones" %prize
 #lt.Lottery.sendtable(conn,table,message)
 
 time.sleep(15)
-count = 1
 
-while True:
-    d = lt.Lottery.pullout(conn,draw)
-    check = lt.Lottery.checkwinner(conn,lott,draw)
-    if check == 0:
-        print(d)
-        if count%3==0:
-            print(lt.Lottery.gettable(conn,lott,draw))
-        count += 1
-    else:
-        message = "Winner is %s! Don't you just hate them" %d.upper()   
-        print(message)
-        break
+lt.Lottery.run(conn,draw)
